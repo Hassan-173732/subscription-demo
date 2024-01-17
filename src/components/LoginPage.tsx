@@ -32,8 +32,9 @@ const LoginPage: React.FC = () => {
 
       if (response.status === 200) {
         console.log(response);
+        const data = response.data;
         // Redirect to /dashboard on successful login
-        window.location.href = '/dashboard';
+        window.location.href = `/dashboard?customerId=${data.customerId}`;
       } else {
         console.log('Unexpected response status:', response.status);
       }

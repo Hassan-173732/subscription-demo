@@ -34,6 +34,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  customerId: {
+    type: String,
+    required: false,
+  },
+  subscriptionStatus: {
+    type: Boolean,
+    required: false,
+  },
+  subscriptionId: {
+    type: String,
+    required: false,
+  },
+  
 });
 
 const User = mongoose.model('User', userSchema);

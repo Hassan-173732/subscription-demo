@@ -1,10 +1,72 @@
 import React from 'react';
+import axios from 'axios';
 
 const SubscriptionPage: React.FC = () => {
   const handleSignOut = () => {
     // Implement your signout logic here
     window.location.href = '/';
   };
+
+
+const suscribeMonthly = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerId = urlParams.get('customerId');
+
+    const data = {
+        customerId: customerId,
+        priceId: 'price_1OZO8DDqnHv1iyyjs2t97KpX',
+    }
+
+    fetch('http://localhost:5000/api/subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            window.location.href = data.url;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+    })    
+
+
+   
+}
+
+
+const suscribeYearly = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerId = urlParams.get('customerId');
+
+    const data = {
+        customerId: customerId,
+        priceId: 'price_1OZOujDqnHv1iyyjI7V3kJ6i',
+    }
+
+    fetch('http://localhost:5000/api/subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            window.location.href = data.url;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+    })    
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -19,7 +81,7 @@ const SubscriptionPage: React.FC = () => {
               <li>Priority customer support</li>
               <li>Special discounts on premium events</li>
             </ul>
-            <button className="w-full bg-blue-700 text-white p-3 rounded-md mt-6 hover:bg-blue-800 focus:outline-none focus:ring focus:border-blue-300">
+            <button className="w-full bg-blue-700 text-white p-3 rounded-md mt-6 hover:bg-blue-800 focus:outline-none focus:ring focus:border-blue-300" onClick={e => suscribeMonthly(e)}>
               Subscribe Monthly
             </button>
           </div>
